@@ -22,12 +22,7 @@ option(BUILD_TESTING "Build METIS self-tests" ON)
 
 message(STATUS "${PROJECT_NAME} ${PROJECT_VERSION} CMake ${CMAKE_VERSION} install prefix ${CMAKE_INSTALL_PREFIX}")
 
-FetchContent_Declare(GKlib
-GIT_REPOSITORY https://github.com/scivision/GKlib.git
-GIT_TAG 6897bfe
-GIT_SHALLOW true
-)
-FetchContent_MakeAvailable(GKlib)
+find_package(GKlib REQUIRED)
 
 set(CMAKE_C_STANDARD 99)
 
@@ -45,10 +40,10 @@ add_library(metis)
 target_include_directories(metis PUBLIC
 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/libmetis>
 $<INSTALL_INTERFACE:include>
-PRIVATE ${PROJECT_SOURCE_DIR}/include ${gklib_SOURCE_DIR}
+PRIVATE ${PROJECT_SOURCE_DIR}/include 
 )
 target_link_libraries(metis
-PUBLIC GKlib
+PUBLIC GKlib::GKlib
 PRIVATE $<$<BOOL:${UNIX}>:m>
 )
 
