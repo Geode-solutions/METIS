@@ -26,11 +26,6 @@ find_package(GKlib REQUIRED)
 
 set(CMAKE_C_STANDARD 11)
 
-add_compile_definitions(
-"REALTYPEWIDTH=$<IF:$<BOOL:${REALTYPEWIDTH}>,${REALTYPEWIDTH},32>"
-"IDXTYPEWIDTH=$<IF:$<BOOL:${IDXTYPEWIDTH}>,${IDXTYPEWIDTH},32>"
-)
-
 include(conf/gkbuild.cmake)
 
 install(FILES include/metis.h TYPE INCLUDE)
